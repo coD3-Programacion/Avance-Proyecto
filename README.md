@@ -25,6 +25,10 @@
 #Aqui va el programa preliminar
 ```
 
+### Explicacion del programa
+
+*Basicamente...
+
 ### Algoritmo preliminar
 
 ```mermaid
