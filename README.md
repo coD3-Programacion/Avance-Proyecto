@@ -38,12 +38,12 @@ El jugador gana si descubre todas las casillas que no contienen minas o si coloc
 
 Para que el programa funcione se crearon seis funciones principales, las cuales son: 
 
--Crear la matriz de la pantalla, es decir, a la que el usuario va a tener acceso. 
--Crear la segunda matriz(la de la logica) que es donde van a estar los datos de cada casilla.
--Poner las minas, tomando en cuenta que cada vez que se ponga una se le suma 1 a las casillas adyacentes. 
--Funcion para destapar todas las casillas adyacentes que tienen 0 cuando se destapa una casilla que tenga 0. 
--Funcion que destapa una casilla en una posicion(Si es mina, el usuario pierde)
--Funcion para colocar una bandera en la posicion. 
+- Funcion para crear la matriz de la pantalla, es decir, a la que el usuario va a tener acceso. 
+- Funcion para crear la segunda matriz(la de la logica) que es donde van a estar los datos de cada casilla.
+- Funcion para poner las minas, tomando en cuenta que cada vez que se ponga una se le suma 1 a las casillas adyacentes. 
+- Funcion para destapar todas las casillas adyacentes que tienen 0 cuando se destapa una casilla que tenga 0. 
+- Funcion que destapa una casilla en una posicion(Si es mina, el usuario pierde)
+- Funcion para colocar una bandera en la posicion. 
 
 ### Programa preliminar
 
