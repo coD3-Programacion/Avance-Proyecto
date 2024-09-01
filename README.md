@@ -70,10 +70,4 @@ cada casilla que se destape se suma en casillas destapadas
     Z(Casillas minas = 0
     Casillas destapadas = 0)
 
-%% Individual node styling. Try the visual editor toolbar for easier styling!
-    style E color:#FFFFFF, fill:#AA00FF, stroke:#AA00FF
-    style G color:#FFFFFF, stroke:#00C853, fill:#00C853
-    style I color:#FFFFFF, stroke:#2962FF, fill:#2962FF
-
-%% You can add notes with two "%" signs in a row!
 ```
