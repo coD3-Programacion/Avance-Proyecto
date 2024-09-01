@@ -6,6 +6,10 @@
 
 * Diego Garcés Torres
 
+# Logo: 
+
+[![Captura-de-pantalla-2024-09-01-114242.png](https://i.postimg.cc/ZYcmqRNh/Captura-de-pantalla-2024-09-01-114242.png)](https://postimg.cc/yWktQ7nf)
+
 # Alternativa Seleccionada:
 La alternativa elegida fue desarrollar un juego de Buscaminas, un juego clasico que consiste en destapar todas las casillas vacías de un tablero sin revelar aquellas que contienen minas. Este proyecto fue seleccionado porque ofrece la oportunidad de implementar varios aspectos técnicos clave, como la generación aleatoria de minas, la revelación de celdas y el cálculo preciso de los números adyacentes. Además, implica la creación de una interfaz gráfica que no solo debe ser intuitiva y fácil de usar, sino también visualmente atractiva para el usuario.
 
