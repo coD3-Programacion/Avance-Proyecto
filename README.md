@@ -60,7 +60,7 @@ cada casilla que se destape se suma en casillas destapadas
 
 %% Conexiones entre los nodos
     A-->B-->Z-->C-->D-->E-->G-->U-->V-->W-->J
-    D-->F-->I-->K-->J
+    D-->F-->H-->I-->K-->J
     I-->L-->M-->N-->P
     M-->O-->Q
     P-->C
@@ -69,4 +69,11 @@ cada casilla que se destape se suma en casillas destapadas
     V-->Y-->C
     Z(Casillas minas = 0
     Casillas destapadas = 0)
+
+%% Individual node styling. Try the visual editor toolbar for easier styling!
+    style E color:#FFFFFF, fill:#AA00FF, stroke:#AA00FF
+    style G color:#FFFFFF, stroke:#00C853, fill:#00C853
+    style I color:#FFFFFF, stroke:#2962FF, fill:#2962FF
+
+%% You can add notes with two "%" signs in a row!
 ```
