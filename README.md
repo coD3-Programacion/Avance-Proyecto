@@ -7,7 +7,10 @@
 * Diego Garcés Torres
 
 # Alternativa Seleccionada:
-La alternativa que se selecciono fue la de hacer un buscaminas ya que...
+La alternativa elegida fue desarrollar un juego de Buscaminas, un juego clasico que consiste en destapar todas las casillas vacías de un tablero sin revelar aquellas que contienen minas. Este proyecto fue seleccionado porque ofrece la oportunidad de implementar varios aspectos técnicos clave, como la generación aleatoria de minas, la revelación de celdas y el cálculo preciso de los números adyacentes. Además, implica la creación de una interfaz gráfica que no solo debe ser intuitiva y fácil de usar, sino también visualmente atractiva para el usuario.
+
+Un aspecto particularmente interesante de este proyecto es su potencial para expansión. Se pueden añadir diferentes niveles de dificultad, temporizadores y tableros personalizados, lo que permite convertir este desarrollo en un proyecto mucho más completo y sofisticado. Estas características adicionales no solo aumentan la complejidad del juego, sino que también permiten explorar diversas técnicas de programación y diseño, enriqueciendo aún más la experiencia de desarrollo.
+
 
 ### Lógica (Como se va a desarrollar el programa)
 *Hay ciertas cosas que hay que tener en cuenta en la logica interna del programa...
