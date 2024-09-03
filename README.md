@@ -125,6 +125,38 @@ def colocar_minas():
         numero_minas += 1
 ```
 
+Para entender un poco mas esta funcion, primero hay que entender que la matriz de la logica al principio se ve asi:
+
+[![Matriz-Real.jpg](https://i.postimg.cc/zfdLT7bv/Matriz-Real.jpg)](https://postimg.cc/mcH2sQSW)
+
+Luego de poner la primera mina aleatoriamente y recorrer las casillas adyacentes aumentando 1 se veria algo asi:
+
+[![Mina-1.jpg](https://i.postimg.cc/YCGD5DkK/Mina-1.jpg)](https://postimg.cc/K1b5LNRJ)
+
+Del mismo modo funciona, sin importar si esta en las esquinas o en las paredes de la matriz
+
+[![Mina-2.jpg](https://i.postimg.cc/632d3gjt/Mina-2.jpg)](https://postimg.cc/gXpwtSbT)
+
+[![Mina-5.jpg](https://i.postimg.cc/G2fnP8xv/Mina-5.jpg)](https://postimg.cc/YGQPMSVS)
+
+[![Mina-4.jpg](https://i.postimg.cc/1thzGdR9/Mina-4.jpg)](https://postimg.cc/Ty0GGCWS)
+
+Ahora al poner la 2da mina aleatoriamente la matriz cambia a esto:
+
+[![Mina-6.jpg](https://i.postimg.cc/Hx8dh9x6/Mina-6.jpg)](https://postimg.cc/34hsyp2G)
+
+Y con una tercera a esto:
+
+[![Mina-7.jpg](https://i.postimg.cc/rpPqjP8d/Mina-7.jpg)](https://postimg.cc/Jyjw4KHm)
+
+Al terminar de poner las 10 minas aleatoria la matriz logica se ve asi:
+
+[![Mina-8.jpg](https://i.postimg.cc/L8SwPK19/Mina-8.jpg)](https://postimg.cc/fJH84PCp)
+
+Evidentemente esto no se muestra al usuario ya que se ven todas las minas, esto unicamente es para la logica del juego, si se ve desde la perspectiva del jugador, el usuario veria el tablero de esta forma:
+
+[![Captura-de-pantalla-Programacion.png](https://i.postimg.cc/ZR14zrRJ/Captura-de-pantalla-Programacion.png)](https://postimg.cc/7GMpgJ0R)
+
 ## Funcion casillas_adyacentes()
 Funcion para que al destapar una casilla con 0, se destapen sus casillas adyacentes.
 
