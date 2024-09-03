@@ -509,47 +509,52 @@ if __name__ == "__main__":
 flowchart TD
 %% Nodos
     A("Inicio")
-    B("Se imprimen las reglas y el tablero en la pantalla")
-    C("Se le pide al usuario una posicion")
-    D{¿Desea poner una bandera
+    B("Se imprimen las reglas
+    y el tablero en la pantalla")
+    C("Se crea la matriz de
+     pantalla y la matriz de la logica")
+    D("Minas señaladas = 0")
+    E("Se colocan las minas aleatoriamente")
+    F("Se le pide al usuario una posicion")
+    G{¿Desea poner una bandera
       o destapar la casilla?}
-    E(Desea poner una bandera)
-    F(Desea destapar la casilla)
-    G(Se pone una bandera)
-    H(Se destapa la casilla)
-    I{¿La casilla
-     es una mina?}
-    J(Fin)
-    K(Si)
-    L(No)
-    M{¿La casilla
-     contiene un cero?}
-    N(Si)
-    O(No)
-    P(Se destapan las casillas adyacentes que también son ceros y
-cada casilla que se destape se suma en casillas destapadas
-)
-    Q(Se suma uno en casillas destapadas)
-    R{¿Casillas
-    destapadas = 90?}
-    S(Si)
-    T(No)
-    U(Se le suma 1 a casillas minas)
-    V{¿Casillas minas
-    es igual a 10?}
-    W(Si)
-    Y(No)
-
+      H(Desea poner una bandera)
+        I(Se pone una bandera)
+        J(La bandera esta correctamente señalada?)
+          K(Si)
+            L(Se suma 1 en minas señaladas)
+            M(Ha señalado correctamente todas las minas?)
+              N(Si)
+                O(Gana el juego)
+              P(No)
+          Q(No)
+      R(Desea destapar la casilla)
+        S(Se destapa la casilla)
+        T{¿La casilla
+         es una mina?}
+          U(Si)
+            V(Pierde el juego)
+          W(No)
+            X{¿La casilla
+              contiene un cero?}
+              Y(Si)
+                Z(Se destapan las casillas adyacentes
+                que también son ceros)
+              AA(No)
+    AB(FIN)
+    
 %% Conexiones entre los nodos
-    A-->B-->Z-->C-->D-->E-->G-->U-->V-->W-->J
-    D-->F-->H-->I-->K-->J
-    I-->L-->M-->N-->P
-    M-->O-->Q
-    P-->C
-    Q-->R-->S-->J
-    R-->T-->C
-    V-->Y-->C
-    Z(Casillas minas = 0
-    Casillas destapadas = 0)
+    A-->B-->C-->D-->E-->F-->G
+      G-->H-->I-->J
+        J-->K-->L-->M
+          M-->N-->O-->AB
+          M-->P-->F
+        J-->Q-->F
+      G-->R-->S-->T
+        T-->U-->V-->AB
+        T-->W-->X
+          X-->Y-->Z-->F
+          X-->AA-->F
+     
 
 ```
