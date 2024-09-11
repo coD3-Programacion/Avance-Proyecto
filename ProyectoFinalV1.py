@@ -1,4 +1,5 @@
 import random
+#Se importa random para colocar las minas aleatoriamente
 
 def matriz_falsa_funcion():
     #Lista con la matriz completa, lista de cada una de las filas y lista con # de columnas
@@ -29,6 +30,7 @@ def matriz_falsa_funcion():
             print(matriz_falsa[i])
 
 def matriz_real_funcion():
+    #Lista con la matriz real completa y lista de cada una de las filas
     global matriz_real
     matriz_real=[]
     filas_matriz_real = []
@@ -38,7 +40,9 @@ def matriz_real_funcion():
         for j in range(10):
             #Por el momento todos los valores van a ser cero
             filas_matriz_real.append(0) 
+        #Se agrega la fila de ceros a la matriz
         matriz_real.append(filas_matriz_real)
+        #Se reinicia la lista de las filas que se rellenara de ceros otra vez
         filas_matriz_real = []
 
 def colocar_minas():
@@ -63,7 +67,6 @@ def colocar_minas():
                     #Si la posicion es la mina entonces se omite, sino se suma 1 a los alrededores
                     if matriz_real[i][j] == "*": 
                         continue 
-
                     #Suma de 1 a los alrededores
                     matriz_real[i][j] = matriz_real[i][j] + 1
         
@@ -107,31 +110,33 @@ def ingresar_verificar_posicion():
     int(lista_usuario_posicion[1])
     int(lista_usuario_posicion[2])
 
+    #En el return esta la letra ("M" o "D") y la fila y la columna
     return lista_usuario_posicion[0], lista_usuario_posicion[1], lista_usuario_posicion[2]
 
 
 def casillas_adyacentes(fila_escogida, columna_escogida):
-    # Coordenadas para los movimientos en las 8 direcciones
+    #Las coordenadas para los movimientos en las 8 direcciones (casillas adyacentes)
     direcciones = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
-    # Verifica si la celda ya fue destapada
+    #El if verifica si la posicion ya fue destapada
     if matriz_falsa[fila_escogida][columna_escogida] != " ?":
         return
     
-    # Si la celda en la matriz real es 0, hay que destaparla
+    #Si la celda en la matriz real es 0, se destapa
     if matriz_real[fila_escogida-1][columna_escogida-1] == 0:
-        matriz_falsa[fila_escogida][columna_escogida] = " 0"  # Marcamos como 0 en la matriz visible
+        matriz_falsa[fila_escogida][columna_escogida] = " 0" 
         
-        # Recorrer las celdas adyacentes
+        #El ciclo for recorre las celdas adayacentes
         for direccion in direcciones:
+            #Se crean 2 variables que son la fila adicional y la columna adicional (con ayuda de las direcciones)
             fila_adicional = fila_escogida + direccion[0]
             columna_adicional = columna_escogida + direccion[1]
 
-            # Verificar si la celda adyacente está dentro del tablero
-            if 0 <= fila_adicional < 10 and 0 <= columna_adicional < 10:
+            #Aca se verifica si la celda adyacente esta dentro del tablero
+            if 1 <= fila_adicional < 10 and 1 <= columna_adicional < 10:
                 if matriz_falsa[fila_adicional][columna_adicional] == " ?":
                     if matriz_real[fila_adicional-1][columna_adicional-1] == 0:
-                        # Llamada recursiva si la celda adyacente también es 0
+                        #Llamada recursiva si la celda adyacente también es 0
                         casillas_adyacentes(fila_adicional, columna_adicional)
                     else:
                         """# Si no es 0, simplemente mostrar el valor en la matriz visible
@@ -142,34 +147,25 @@ def casillas_adyacentes(fila_escogida, columna_escogida):
                             matriz_falsa[fila_adicional][columna_adicional] = " 2"
                         
 
-    # Si la celda no es 0, simplemente destaparla
-    else:
-        for direccion in direcciones:
-            fila_adicional = fila_escogida + direccion[0]
-            columna_adicional = columna_escogida + direccion[1]
+    # Si la celda no es 0, se destapa y dependiendo de si es 1 o 2, se muestra en la matriz falsa
+    if matriz_real[fila_escogida-1][columna_escogida-1] == 1:
+        matriz_falsa[fila_escogida][columna_escogida] = " 1"
         
-            if matriz_real[fila_adicional-1][columna_adicional-1] == 1:
-                matriz_falsa[fila_adicional][columna_adicional] = " 1"
-            elif matriz_real[fila_adicional-1][columna_adicional-1] == 2:
-                matriz_falsa[fila_adicional][columna_adicional] = " 2"
-
-        """matriz_falsa[fila_escogida][columna_escogida] = matriz_real[fila_escogida-1][columna_escogida-1]"""
-
+    elif matriz_real[fila_escogida-1][columna_escogida-1] == 2:
+        matriz_falsa[fila_escogida][columna_escogida] = " 2"
 
 def destapar_celda(bandera_o_destapar, fila_escogida, columna_escogida):
     #Se globalizan las variables definidas para trabajar con ellas
-    global casillas_correctamente_destapadas
     global minas_correctamente_señaladas
-
-    global lista_casillas_destapadas
     global lista_minas_señaladas
 
     #Si se escogio señalar mina, entonces se coloca ! en la matriz
     if bandera_o_destapar == "M": 
+        #Se coloca "!" como bandera en la matriz falsa
         matriz_falsa[fila_escogida][columna_escogida] = " !"
         """Si la mina esta correctamente señalada (es decir si realmente hay una mina en la celda) y no esta en la lista de minas señaladas entonces 
-        se suma 1 en la variable de minas_correctamente_señaladas y se agrega a la lista de minas señaladas para que si intenta señalar la misma mina
-        no sume otro valor"""
+        se suma 1 en la variable de minas_correctamente_señaladas y se agrega a la lista de minas señaladas para que si el jugador intenta señalar 
+        la misma mina no sume otro valor"""
         if matriz_real[fila_escogida-1][columna_escogida-1] == "*" and (fila_escogida, columna_escogida) not in lista_minas_señaladas:
             minas_correctamente_señaladas += 1
             lista_minas_señaladas.append((fila_escogida, columna_escogida))
@@ -186,12 +182,11 @@ def destapar_celda(bandera_o_destapar, fila_escogida, columna_escogida):
         for i in range(len(matriz_falsa)):
             print(matriz_falsa[i])
 
-    #Si se escogio destapar, entonces se muestra la celda
     elif bandera_o_destapar == "D":
-        """casillas_adyacentes(fila_escogida, columna_escogida)"""
-        matriz_falsa[fila_escogida][columna_escogida] = matriz_real[fila_escogida-1][columna_escogida-1]
-        #El espacio es para que no se defoSrme la matriz y los encabezados tengan sentido
-        matriz_falsa[fila_escogida][columna_escogida] = (" "+ (str(matriz_falsa[fila_escogida][columna_escogida]))) 
+        #Se destapa o se muestra la casilla:
+        casillas_adyacentes(fila_escogida, columna_escogida)
+        #El espacio es para que no se deforme la matriz y los encabezados tengan sentido
+        matriz_falsa[fila_escogida][columna_escogida] = (" "+ (str(matriz_real[fila_escogida-1][columna_escogida-1])))
         
         #Despues se muestra la matriz
         for i in range(len(matriz_falsa)):
@@ -204,19 +199,7 @@ def destapar_celda(bandera_o_destapar, fila_escogida, columna_escogida):
             print("--------------------------------------------------------------------------------------------------------")
             return True
         
-        #Si la posicion no esta en la lista de casillas destapadas entonces se suma 1 a la variable
-        if (fila_escogida, columna_escogida) not in lista_casillas_destapadas:
-            casillas_correctamente_destapadas += 1
-            print("Casillas correctamente destapadas: ", casillas_correctamente_destapadas)
-            lista_casillas_destapadas.append((fila_escogida, columna_escogida))
-
-            #Si llega a 90 casillas destapadas gana el juego
-            if casillas_correctamente_destapadas == 90:
-                print("\n--------------------------------------------------------------------------------------------------------")
-                print("-------------------------------HAS DESCUBIERTO TODAS LAS CELDAS! HAS GANADO!----------------------------")
-                print("--------------------------------------------------------------------------------------------------------")
-                return True
-    
+        
 if __name__ == "__main__":
     print("--------------------------------------------------------------------------------------------------------")
     print("-----------------------------------------------BUSCAMINAS-----------------------------------------------")
@@ -229,8 +212,6 @@ if __name__ == "__main__":
     
     #Se inicializan las variables con las que se gana el juego
     minas_correctamente_señaladas = 0
-    casillas_correctamente_destapadas = 0
-    lista_casillas_destapadas = []
     lista_minas_señaladas = []
     
     #Se crea la matriz falsa y enseguida la matriz de la logica o la matriz real
@@ -240,8 +221,12 @@ if __name__ == "__main__":
     #Aca se colocan las 10 minas en la matriz de la logica
     colocar_minas()
 
+    #Este es el cilo en el que va a estar todo el juego
     while True:
+        #Las variables del return se guardan en las variables siguientes:
         bandera_o_destapar, fila_escogida, columna_escogida = ingresar_verificar_posicion() 
+        #El return de la funcion se guarda en la variable y si esta es True, es porque gano o perdio, por lo tanto el juego acaba
         Terminar = destapar_celda(bandera_o_destapar, int(fila_escogida), int(columna_escogida))
         if Terminar == True:
             break
+        
