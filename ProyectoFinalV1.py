@@ -240,10 +240,6 @@ if __name__ == "__main__":
     #Aca se colocan las 10 minas en la matriz de la logica
     colocar_minas()
 
-    print(" ")
-    for i in range(len(matriz_real)):
-            print(matriz_real[i])
-
     while True:
         bandera_o_destapar, fila_escogida, columna_escogida = ingresar_verificar_posicion() 
         Terminar = destapar_celda(bandera_o_destapar, int(fila_escogida), int(columna_escogida))
