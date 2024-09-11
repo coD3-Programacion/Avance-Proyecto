@@ -165,41 +165,29 @@ def casillas_adyacentes(fila_escogida, columna_escogida):
     #Las coordenadas para los movimientos en las 8 direcciones (casillas adyacentes)
     direcciones = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
-    #El if verifica si la posicion ya fue destapada
+    #El if verifica si la posicion ya fue destapada, si es asi no hace nada
     if matriz_falsa[fila_escogida][columna_escogida] != " ?":
         return
-    
+
+    valor_celda_real = matriz_real[fila_escogida-1][columna_escogida-1]
+
     #Si la celda en la matriz real es 0, se destapa
-    if matriz_real[fila_escogida-1][columna_escogida-1] == 0:
+    if valor_celda_real == 0:
         matriz_falsa[fila_escogida][columna_escogida] = " 0" 
         
-        #El ciclo for recorre las celdas adayacentes
+        #El ciclo for recorre las celdas adyacentes
         for direccion in direcciones:
             #Se crean 2 variables que son la fila adicional y la columna adicional (con ayuda de las direcciones)
             fila_adicional = fila_escogida + direccion[0]
             columna_adicional = columna_escogida + direccion[1]
 
             #Aca se verifica si la celda adyacente esta dentro del tablero
-            if 1 <= fila_adicional < 10 and 1 <= columna_adicional < 10:
-                if matriz_falsa[fila_adicional][columna_adicional] == " ?":
-                    if matriz_real[fila_adicional-1][columna_adicional-1] == 0:
-                        #Llamada recursiva si la celda adyacente también es 0
-                        casillas_adyacentes(fila_adicional, columna_adicional)
-                    else:
-                        """# Si no es 0, simplemente mostrar el valor en la matriz visible
-                        matriz_falsa[fila_adicional][columna_adicional] = matriz_real[fila_adicional-1][columna_adicional-1]"""
-                        if matriz_real[fila_adicional-1][columna_adicional-1] == 1:
-                            matriz_falsa[fila_adicional][columna_adicional] = " 1"
-                        elif matriz_real[fila_adicional-1][columna_adicional-1] == 2:
-                            matriz_falsa[fila_adicional][columna_adicional] = " 2"
+            if 1 <= fila_adicional <= 10 and 1 <= columna_adicional <= 10:
+                casillas_adyacentes(fila_adicional, columna_adicional)
                         
-
-    # Si la celda no es 0, se destapa y dependiendo de si es 1 o 2, se muestra en la matriz falsa
-    if matriz_real[fila_escogida-1][columna_escogida-1] == 1:
-        matriz_falsa[fila_escogida][columna_escogida] = " 1"
-        
-    elif matriz_real[fila_escogida-1][columna_escogida-1] == 2:
-        matriz_falsa[fila_escogida][columna_escogida] = " 2"
+    #Si es distinto de 0, solo destapamos la celda actual
+    else:
+        matriz_falsa[fila_escogida][columna_escogida] = f" {valor_celda_real}"
 ```
 
 ## Funcion destapar_celda()
