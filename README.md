@@ -522,3 +522,57 @@ if __name__ == "__main__":
             break
         
 ```
+
+### Algoritmo Preliminar
+```mermaid
+flowchart TD
+%% Nodos
+    A("Inicio")
+    B("Se imprimen las reglas
+    y el tablero en la pantalla")
+    C("Se crea la matriz de
+     pantalla y la matriz de la logica")
+    D("Minas señaladas = 0")
+    E("Se colocan las minas aleatoriamente")
+    F("Se le pide al usuario una posicion")
+    G{¿Desea poner una bandera
+      o destapar la casilla?}
+      H(Desea poner una bandera)
+        I(Se pone una bandera)
+        J(La bandera esta correctamente señalada?)
+          K(Si)
+            L(Se suma 1 en minas señaladas)
+            M(Ha señalado correctamente todas las minas?)
+              N(Si)
+                O(Gana el juego)
+              P(No)
+          Q(No)
+      R(Desea destapar la casilla)
+        S(Se destapa la casilla)
+        T{¿La casilla
+         es una mina?}
+          U(Si)
+            V(Pierde el juego)
+          W(No)
+            X{¿La casilla
+              contiene un cero?}
+              Y(Si)
+                Z(Se destapan las casillas adyacentes
+                que también son ceros)
+              AA(No)
+    AB(FIN)
+    
+%% Conexiones entre los nodos
+    A-->B-->C-->D-->E-->F-->G
+      G-->H-->I-->J
+        J-->K-->L-->M
+          M-->N-->O-->AB
+          M-->P-->F
+        J-->Q-->F
+      G-->R-->S-->T
+        T-->U-->V-->AB
+        T-->W-->X
+          X-->Y-->Z-->F
+          X-->AA-->F
+    
+```
