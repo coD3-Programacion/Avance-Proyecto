@@ -113,7 +113,7 @@ def matriz_real_funcion():
 ```
 
 ## Funcion menu_terminal()
-wrewrwer
+
 ```python
 def menu_terminal():
     global cantidad_minas, tamaño_tablero, lista_numeros, limite_tiempo, modo_de_juego, nombre_usuario 
@@ -373,7 +373,6 @@ def destapar_celda(bandera_o_destapar, fila_escogida, columna_escogida):
 ```
 
 ## Funcion transcurso_juego()
-sdfsdfsddf
 
 ```python
 def transcurso_juego():
@@ -419,7 +418,6 @@ def transcurso_juego():
 ```
 
 ## Funcion puntuaciones()
-asdasdads
 
 ```python
 def puntuaciones():
@@ -449,7 +447,6 @@ def puntuaciones():
 ```
 
 ## Funcion guardar_partida()
-fdsgad
 
 ```python
 def guardar_partida(nombre_archivo = "partida_guardada.json"):
@@ -487,7 +484,6 @@ def cargar_partida(nombre_archivo="partida_guardada.json"):
 
 
 ## Funcion guardar_partida()
-fdsgad
 
 ```python
 def guardar_partida(nombre_archivo = "partida_guardada.json"):
@@ -520,7 +516,6 @@ def cargar_partida(nombre_archivo="partida_guardada.json"):
 
 
 ## Funcion crear_partida_guardada()
-fdsgad
 
 ```python
 def crear_partida_guardada():
@@ -573,7 +568,6 @@ def crear_partida_guardada():
 ```
 
 ## Funcion menu_principal()
-dsdfsd
 
 ```python
 def menu_principal():
@@ -601,7 +595,6 @@ def menu_principal():
 ```
 
 ## Funcion jugar_terminal()
-dsdfsd
 
 ```python
 def jugar_terminal():
