@@ -467,7 +467,6 @@ def guardar_partida(nombre_archivo = "partida_guardada.json"):
 
 
 ## Funcion cargar_partida()
-fdsgad
 
 ```python
 def cargar_partida(nombre_archivo="partida_guardada.json"):
