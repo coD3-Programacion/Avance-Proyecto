@@ -48,7 +48,7 @@ Se hicieron varias actualizaciones respecto al codigo anterior, agregandole y op
 
 # Funciones
 
-#### Para que crear el programa se utilizaron 16 funciones en las que esta toda la logica del programa, las cuales son: 
+#### Para que crear el programa se utilizaron ciertas funciones en las que esta toda la logica del programa, las cuales son: 
 
 ## Funcion matriz_falsa_funcion()
 Funcion para crear la matriz de la pantalla con sus encabezados, es decir, a la que el usuario va a tener acceso, esta funcion solamente sirve para imprimirla por lo que no tiene ningun efecto en la logica detras de ella.
@@ -442,8 +442,11 @@ def puntuaciones():
         print(f"El nivel de dificultad fue {modo_de_dificultad}\n \
             La cantidad de minas señaladas correctamente es {minas_correctamente_señaladas}\n \
             Felicidades tu puntaje fue {puntaje}")
-    elif modo_de_juego.lower == "cl":
+    elif modo_de_juego.lower() == "cl":
         puntaje = minas_correctamente_señaladas*500
+        print(f"El nivel de dificultad fue {modo_de_dificultad}\n \
+            La cantidad de minas señaladas correctamente es {minas_correctamente_señaladas}\n \
+            Felicidades tu puntaje fue {puntaje}")
 ```
 
 ## Funcion guardar_partida()
@@ -467,7 +470,6 @@ def guardar_partida(nombre_archivo = "partida_guardada.json"):
 
 
 ## Funcion cargar_partida()
-fdsgad
 
 ```python
 def cargar_partida(nombre_archivo="partida_guardada.json"):
@@ -481,61 +483,34 @@ def cargar_partida(nombre_archivo="partida_guardada.json"):
         print(f"No se encontro ninguna partida guardada.")
         return None
 ```
-
-
-## Funcion guardar_partida()
-
-```python
-def guardar_partida(nombre_archivo = "partida_guardada.json"):
-    global matriz_real, lista_minas_señaladas, matriz_falsa, modo_de_dificultad, modo_de_juego, tiempo_restante
-    datos_partida = {
-        "matriz_real": matriz_real,
-        "tablero" : matriz_falsa,
-        "banderas" : lista_minas_señaladas,
-        "modo de dificultad" : modo_de_dificultad,
-        "modo de juego" : modo_de_juego,
-        "tiempo restante": tiempo_restante
-    }
-
-    with open(nombre_archivo, "w") as archivo:
-        json.dump(datos_partida, archivo)
-    return datos_partida
-
-
-def cargar_partida(nombre_archivo="partida_guardada.json"):
-    try:
-        with open(nombre_archivo, "r") as archivo:
-            datos_partida = json.load(archivo)  
-
-        print(f"Partida cargada desde {nombre_archivo}")
-        return datos_partida
-    except FileNotFoundError:
-        print(f"No se encontro ninguna partida guardada.")
-        return None
-```
-
 
 ## Funcion crear_partida_guardada()
 
 ```python
 def crear_partida_guardada():
-    global matriz_real, lista_minas_señaladas, matriz_falsa, modo_de_dificultad, modo_de_juego, tiempo_restante,limite_tiempo
+    global matriz_real, lista_minas_señaladas, matriz_falsa, modo_de_dificultad, modo_de_juego, tiempo_restante,limite_tiempo, tamaño_tablero, lista_numeros
     datos_partida = {}
     datos_partida = cargar_partida()
-    matriz_real = datos_partida["matriz_real"]
+    print(datos_partida)
+    tamaño_tablero = datos_partida["tamaño tablero"]
     lista_minas_señaladas = datos_partida["banderas"]
     matriz_falsa = datos_partida["tablero"]
     modo_de_dificultad = datos_partida["modo de dificultad"]
     modo_de_juego = datos_partida["modo de juego"]
     tiempo_restante = datos_partida["tiempo restante"]
-    print("--------------------------------------------------------------------------------------------------------")
-    print("--------------------------------PARTIDA GUARDADA CORRECTAMENTE------------------------------------------")
-    print("--------------------------------------------------------------------------------------------------------")
+    matriz_real = datos_partida["matriz_real"]
+
+    print("-------------------------------------------------------------------------------------------------------")
+    print("--------------------------------PARTIDA CARGADA CORRECTAMENTE------------------------------------------")
+    print("-------------------------------------------------------------------------------------------------------")
+
+    lista_numeros = [str(i) for i in range(1, tamaño_tablero + 1)]    
+        
     imprimir_tablero()
+    inicio = time.time()
     while True:
         #Se verifica si el usuario quiere guardar la partida
         bandera_o_destapar, fila_escogida, columna_escogida = ingresar_verificar_posicion()
-        inicio = time.time()
         if bandera_o_destapar == "G" and fila_escogida == "G" and columna_escogida == "G":
             print("\n-----------------------------------------------------------------------------------------")
             print("-----------------------------------PARTIDA GUARDADA----------------------------------------")
@@ -583,15 +558,35 @@ def menu_principal():
 
     print("------------------------------------------------JUGAR(Presiona J)----------------------------------------")
     print("------------------------------------------------CARGAR PARTIDA(Presiona C)-------------------------------")
-
-    while True:
-        entrada_usuario = str(input("Por favor ingrese su respuesta: "))
-        if entrada_usuario.lower() == "j":
-            jugar_terminal()
-        elif entrada_usuario.lower() == "c":
-            cargar_partida()
-        else: 
+    print("------------------------------------------------PUNTAJES MAS ALTOS(Presiona P)---------------------------")    
+    entrada_usuario = str(input("Por favor ingrese su respuesta: "))
+    if entrada_usuario not in ["j", "c", "p"]:
+        while entrada_usuario not in ["j", "c", "p"]:
             print("Por favor ingresa un valor valido.")
+            entrada_usuario = str(input("Por favor ingrese su respuesta: "))
+    if entrada_usuario.lower() == "j":
+        print("¿Quieres jugar en la terminal de Python(presiona t) o quieres jugar en una ventana emergente(Presiona v)?")
+        while True:
+            x = str(input("Por favor ingrese su respuesta"))
+            if x.lower() in ["t", "v"]:
+                break
+            else: 
+                print("Por favor ingresar un valor valido.")
+        if x.lower() == "t":
+            jugar_terminal()
+        elif x.lower() == "v":
+            matriz_falsa_funcion()
+            matriz_real_funcion()
+            colocar_minas()
+            pygames()
+    elif entrada_usuario.lower() == "c":
+        try:
+            crear_partida_guardada()
+        except TypeError:
+            print("Primero debes guardar una partida")
+    elif entrada_usuario.lower() == "p":
+        puntuaciones_mas_altas()
+        imprimir_puntajes()
 ```
 
 ## Funcion jugar_terminal()
@@ -619,6 +614,120 @@ def jugar_terminal():
     else:
         print("Gracias por jugar.")
 ```
+## Funcion puntuaciones_mas_altas()
+
+```python
+def puntuaciones_mas_altas():
+    global nombre_usuario, mayores_puntuaciones_clasico, mayores_puntuaciones_contrarreloj, modo_de_dificultad
+    if modo_de_juego == "c":
+        mayores_puntuaciones_contrarreloj = {
+            "1" : {
+                "nombre_usuario": "0",
+                "modo_de_dificultad": "0", 
+                "puntaje": 0
+            },
+            "2":{"nombre_usuario": "0",
+                "modo_de_dificultad": "0", 
+                "puntaje" : 0},
+            "3":{"nombre_usuario": "0",
+                "modo_de_dificultad": "0", 
+                "puntaje" : 0},
+        }
+    elif modo_de_juego == "cl":
+                mayores_puntuaciones_clasico = {
+            "1":{
+                "nombre_usuario": "0",
+                "modo_de_dificultad" : "0", 
+                "puntaje" : 0
+            },
+            "2":{ 
+                "nombre_usuario" : "0",
+                "modo_de_dificultad" : "0", 
+                "puntaje" : 0},
+            "3":{  
+                "nombre_usuario" : "0",
+                "modo_de_dificultad" : "0", 
+                "puntaje" : 0}
+        }
+    if modo_de_juego == "c":
+        if puntaje > mayores_puntuaciones_contrarreloj["1"]["puntaje"]:
+            mayores_puntuaciones_contrarreloj["3"] = mayores_puntuaciones_contrarreloj["2"]
+            mayores_puntuaciones_contrarreloj["2"] = mayores_puntuaciones_contrarreloj["1"]
+            mayores_puntuaciones_contrarreloj["1"]["puntaje"] = puntaje
+            mayores_puntuaciones_contrarreloj["1"]["modo_de_dificultad"] = modo_de_dificultad
+            mayores_puntuaciones_contrarreloj["1"]["nombre_usuario"] = nombre_usuario
+        elif mayores_puntuaciones_contrarreloj["2"]["puntaje"] < puntaje < mayores_puntuaciones_contrarreloj["1"]["puntaje"]:
+            mayores_puntuaciones_contrarreloj["3"] = mayores_puntuaciones_contrarreloj["2"]
+            mayores_puntuaciones_contrarreloj["2"]["puntaje"] = puntaje
+            mayores_puntuaciones_contrarreloj["2"]["modo_de_dificultad"] = modo_de_dificultad
+            mayores_puntuaciones_contrarreloj["2"]["nombre_usuario"] = nombre_usuario
+        elif mayores_puntuaciones_contrarreloj["3"]["puntaje"] < puntaje < mayores_puntuaciones_contrarreloj["2"]["puntaje"]:
+            mayores_puntuaciones_contrarreloj["3"]["puntaje"] = puntaje
+            mayores_puntuaciones_contrarreloj["3"]["modo_de_dificultad"] = modo_de_dificultad
+            mayores_puntuaciones_contrarreloj["3"]["nombre_usuario"] = nombre_usuario
+
+    if modo_de_juego == "cl":
+        if puntaje > mayores_puntuaciones_clasico["1"]["puntaje"]:
+            mayores_puntuaciones_clasico["3"] = mayores_puntuaciones_clasico["2"]
+            mayores_puntuaciones_clasico["2"] = mayores_puntuaciones_clasico["1"]
+            mayores_puntuaciones_clasico["1"]["puntaje"] = puntaje
+            mayores_puntuaciones_clasico["1"]["modo_de_dificultad"] = modo_de_dificultad
+            mayores_puntuaciones_clasico["1"]["nombre_usuario"] = nombre_usuario
+        elif mayores_puntuaciones_clasico["2"]["puntaje"] < puntaje < mayores_puntuaciones_clasico["1"]["puntaje"]:
+            mayores_puntuaciones_clasico["3"] = mayores_puntuaciones_clasico["2"]
+            mayores_puntuaciones_clasico["2"]["puntaje"] = puntaje
+            mayores_puntuaciones_clasico["2"]["modo_de_dificultad"] = modo_de_dificultad
+            mayores_puntuaciones_clasico["2"]["nombre_usuario"] = nombre_usuario
+        elif mayores_puntuaciones_clasico["3"]["puntaje"] < puntaje < mayores_puntuaciones_clasico["2"]["puntaje"]:
+            mayores_puntuaciones_clasico["3"]["puntaje"] = puntaje
+            mayores_puntuaciones_clasico["3"]["modo_de_dificultad"] = modo_de_dificultad
+            mayores_puntuaciones_clasico["3"]["nombre_usuario"] = nombre_usuario
+
+    with open("puntuaciones_contrarreloj.json", "w") as writeFile:
+        json.dump(mayores_puntuaciones_contrarreloj, writeFile)
+
+    with open("puntuaciones_clasico.json", "w") as writeFile:
+        json.dump(mayores_puntuaciones_clasico, writeFile)
+```
+
+## Funcion imprimir_puntajes()
+
+```python
+def imprimir_puntajes():
+    print("Quieres ver los puntajes del modo contrarreloj(presiona c) o del modo clasico(presiona cl)?")
+    with open("puntuaciones_contrarreloj.json", "r") as readFile:
+        puntuaciones_contrarreloj: dict = json.load(readFile)
+    with open("puntuaciones_clasico.json", "r") as readFile:
+        puntuaciones_clasico: dict = json.load(readFile)  
+    while True:
+        x = str(input("Por favor ingrese la respuesta: "))
+        if x.lower() in ["c", "cl"]:
+            break
+        else:
+            print("Por favor ingrese un valor valido.")
+    print("--------------------------------------------------------------------------------------------------------")
+    print("------------------------------------------MAYORES PUNTUACIONES------------------------------------------")
+    print("--------------------------------------------------------------------------------------------------------")
+    if x.lower() == "c":
+        print("|NOMBRE USUARIO       |MODO DE DIFICULTAD        |PUNTAJE")
+        print("------------------------------------------------------------------")
+        for key in puntuaciones_contrarreloj:
+            puntaje = puntuaciones_contrarreloj[key].get("puntaje", "N/A")
+            modo_de_dificultad = puntuaciones_contrarreloj[key].get("modo_de_dificultad", "N/A")
+            nombre_usuario = puntuaciones_contrarreloj[key].get("nombre_usuario", "N/A")
+            print(f"|{nombre_usuario}                    |{modo_de_dificultad}                         |{puntaje}       ")
+            print("------------------------------------------------------------------")
+
+    elif x.lower() == "cl":
+        print("|NOMBRE USUARIO       |MODO DE DIFICULTAD        |PUNTAJE")
+        print("------------------------------------------------------------------")
+        for key in puntuaciones_clasico:
+            puntaje = puntuaciones_clasico[key].get("puntaje")
+            modo_de_dificultad = puntuaciones_clasico[key].get("modo_de_dificultad")
+            nombre_usuario = puntuaciones_clasico[key].get("nombre_usuario")
+            print(f"|{nombre_usuario}                    |{modo_de_dificultad}                         |{puntaje}       ")
+            print("------------------------------------------------------------------")
+```
 
 ### Algoritmo
 ```mermaid
@@ -628,7 +737,7 @@ flowchart TD
     B("Se imprimen las reglas
     y el tablero en la pantalla")
 A-->B
-    C{¿Desea jugar o cargar partida?}
+    C{¿Desea jugar, cargar partida o ver puntajes mas altos?}
 B-->C
     D("Cargar partida")
     E("Jugar nueva partida")
@@ -740,7 +849,9 @@ AR-->AE
 AS-->AT
 AO-->AT
 
-
-  A{"¿Se han señalado con banderas todas las minas?"}
+AU("Puntajes mas altos")
+AV("Se muestran las puntuaciones mas altas")
+C-->AU
+AU-->AV
 
 ```
